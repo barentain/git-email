@@ -72,7 +72,7 @@ int main(void)
                     const string urlCommits = "https://api.github.com/users/" + username + "/events";
                     const string userEmail(jsonData["email"].asString());
                     getUrl(url); // get hidden email
-                    // cout << "[*] Email: " << userEmail << endl;
+                    cout << "[*] Found email in commits: " << userEmail << endl;
                 }
                 else
                 {
