@@ -16,7 +16,6 @@ stringstream readBuffer;
 void getUrl(string url)
 {
     CURL * curl;
-
     curl = curl_easy_init();
 
     struct curl_slist *headers = NULL;
@@ -35,13 +34,11 @@ void getUrl(string url)
 int main(void)
 {
     string username;
-    cout << "[!] Insert GitHub username: ";
-    cin >> username;
+    cout << "[!] Insert GitHub username: "; cin >> username;
 
     const string url = "https://api.github.com/users/" + username;
 
     CURL * curl;
-
     curl = curl_easy_init();
 
     if (curl)
@@ -58,27 +55,41 @@ int main(void)
 
             if (Json::parseFromStream(jsonReader, readBuffer, &jsonData, &errs))
             {
+            	
                 const string userID(jsonData["id"].asString());
                 const string userName(jsonData["name"].asString());
                 const string userEmail(jsonData["email"].asString());
+                const string location(jsonData["location"].asString());
 
                 cout << "\n[*] ID: " << userID << endl;
                 cout << "[*] Username: " << userName << endl;
+                cout << "[*] Location: " << location << endl;
                 if (userEmail.empty())
                 {
-                    cout << "[*] Email: Hidden" << endl;
-                    cout << "\n[?] Checking for email in commits..." << endl;
+                	const string urlCommits = "https://api.github.com/users/" + username + "/events";
+                	getUrl(urlCommits);
+                	if (Json::parseFromStream(jsonReader, readBuffer, &jsonData, &errs))
+                	{
+                		auto haha = jsonData[0]["payload"]["commits"];
 
-                    const string urlCommits = "https://api.github.com/users/" + username + "/events";
-                    const string userEmail(jsonData["email"].asString());
-                    getUrl(url); // get hidden email
-                    cout << "[*] Found email in commits: " << userEmail << endl;
+                    	cout << "[*] Email: Hidden" << endl;
+                    	cout << "\n[?] Checking for email in commits..." << endl;
+
+                    	// for (Json::Value::ArrayIndex i = 0; i != jsonData.size(); i++)
+                		if (jsonData[0].isMember("payload"))
+                			cout << "[*] Email found: " << haha[0]["author"]["email"].asString() << "\n";
+                		else
+                			cout << "[!] No email found.";
+
+                	}
                 }
                 else
                 {
                     cout << "[*] Email: " << userEmail << endl;
                 }
             }
+        } else {
+        	cout << "\n[!] Error happened when getting response from " << url << endl;
         }
     }
     return 0;
