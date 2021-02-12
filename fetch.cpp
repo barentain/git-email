@@ -75,7 +75,6 @@ int main(void)
 						cout << "[*] Email: Hidden" << endl;
 						cout << "\n[?] Checking for email in commits..." << endl;
 
-						// for (Json::Value::ArrayIndex i = 0; i != jsonData.size(); i++)
 						if (jsonData[0].isMember("payload"))
 							cout << "[*] Email found: " << haha[0]["author"]["email"].asString() << "\n";
 						else
