@@ -1,3 +1,5 @@
+// idk if this is good code or not, first c++ script
+
 #include <iostream>
 #include <curl/curl.h>
 #include <json/json.h>

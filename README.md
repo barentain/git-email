@@ -6,7 +6,6 @@ Gather email connected to the GitHub account.
 
 - [Usage](#usage)
 - [Installation](#installation)
-- [Updating](#updating)
 
 ## Usage
 
