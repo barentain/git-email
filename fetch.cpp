@@ -86,11 +86,11 @@ int main(void)
 				}
 				else
 				{
-					cout << "[*] Email: " << userEmail << endl;
+					cout << "[*] Email: \033[3;100;30" << userEmail << "\033[0m" << endl;
 				}
 			}
 		} else {
-			cout << "\n[!] Error happened when getting response from " << url << endl;
+			cout << "\n[!] Error happened when fetching from URL: " << url << endl;
 		}
 	}
 	return 0;
