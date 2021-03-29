@@ -78,7 +78,7 @@ int main(void)
 						cout << "\n[?] Checking for email in commits..." << endl;
 
 						if (jsonData[0].isMember("payload"))
-							cout << "[*] Email found: " << haha[0]["author"]["email"].asString() << "\n";
+							cout << "[*] Email found: \033[3;100;30m" << haha[0]["author"]["email"].asString() << "\033[0m\n";
 						else
 							cout << "[!] No email found.";
 
