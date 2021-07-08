@@ -1,4 +1,4 @@
-// idk if this is good code or not, first c++ script
+// idk if this is good code or not
 
 #include <iostream>
 #include <curl/curl.h>
